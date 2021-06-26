@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { isEmpty, head } = require('lodash')
 import { NextFunction } from 'express'
-import mongoose, { Document, Schema } from 'mongoose'
+import { Document, Schema } from 'mongoose'
+const mongoose = require('mongoose')
 export type IUser = Document & {
     name: string;
     email: string;
