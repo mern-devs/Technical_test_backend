@@ -1,4 +1,0 @@
-
-    "build": "tsc src/db/mongoose.ts src/middlewares/logs.ts src/models/user.ts src/routers/users.ts src/transform/users.ts src/index.ts",
-    "postinstall": "npm run build",
-    "watch-ts": "tsc -w",
