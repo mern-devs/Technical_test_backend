@@ -10,7 +10,7 @@ app.use(logRequest)
 app.use(logError)
 app.use(usersRouter);
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 http.listen(PORT, () => {
 	console.log('Server is up on port', PORT)
 })
