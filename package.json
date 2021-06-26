@@ -6,7 +6,8 @@
   "engines": { "node": "12.16.3" },
   "scripts": {
     "start": "node src/index.ts",
-    "postinstall": "tsc",
+    "build": "tsc",
+    "postinstall": "npm run build",
     "watch-ts": "tsc -w",
     "startNodeMon": "nodemon src/index.ts",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.ts",
