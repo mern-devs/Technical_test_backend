@@ -5,7 +5,7 @@ mongoose.connect(mongoDbUrl, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useFindAndModify: false
-}, (error) => {
+}, (error: Error) => {
 	if(error) {
 		console.log(error)
 	}

@@ -1,7 +1,6 @@
-const transformUser = (user) => {
+const transformUser = (user: any) => {
   const userObject = user.toJSON()
   delete userObject.password
-  delete userObject.accessTokens
   delete userObject.id
   return userObject
 }

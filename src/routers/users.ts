@@ -1,8 +1,12 @@
+const { transformUser } = require("../transform/users");
+import { Request, Response } from 'express';
 const express = require('express')
 const router = new express.Router();
-router.post("/users/login", async (req, res) => {
+const User = require("../models/user");
+router.post("/users/login", async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
+      console.log(email, password)
       const user = await User.findByCredentials(email, password);
       const userObject = transformUser(user);
 

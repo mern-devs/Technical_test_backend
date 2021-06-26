@@ -2,7 +2,18 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { isEmpty, head } = require('lodash')
-const userSchema = new mongoose.Schema({
+import { NextFunction } from 'express'
+import mongoose, { Document, Schema } from 'mongoose'
+export type IUser = Document & {
+    name: string;
+    email: string;
+    password: string;
+    findByCredentials: findByCredentialsFunction;
+    checkPassword: checkPasswordFunction
+} 
+type findByCredentialsFunction = (email: string, password: string) => IUser;
+type checkPasswordFunction = (userId: string, password: string) =>  IUser;
+const userSchema = new Schema<IUser>({
 	name: {
 		type: String,
 		required: true,
@@ -12,7 +23,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
-		validate: (value) => {
+		validate: (value: string) => {
 			if (!validator.isEmail(value)) {
 				throw new Error('Email is invalid')
 			}
@@ -27,15 +38,15 @@ const userSchema = new mongoose.Schema({
 }, {
 	timestamps: true
 })
-userSchema.pre('save', async function (next) {
-	const user = this
+userSchema.pre("save", async function (next) {
+	const user = this as IUser
 	if (user.isModified('password')) {
 		user.password = await bcrypt.hash(user.password, 8)
 	}
 	next()
 })
 
-userSchema.statics.findByCredentials = async (email, password) => {
+userSchema.statics.findByCredentials = async (email: string, password: string) => {
 	let users = await User.find().or([
 		{ email },
 		{ username: email }
@@ -51,7 +62,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 	return user
 }
 
-userSchema.statics.checkPassword = async (userId, password) => {
+userSchema.statics.checkPassword = async (userId: string, password: string) => {
 	const user = await User.findById(userId);
 	if (isEmpty(user)) {
 		throw new Error('User does not exist')
