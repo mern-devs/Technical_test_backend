@@ -5,6 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "node src/index.ts",
+    "postinstall": "tsc",
+    "watch-ts": "tsc -w",
     "startNodeMon": "nodemon src/index.ts",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.ts",
     "local": "env-cmd -e local nodemon src/index.ts"
