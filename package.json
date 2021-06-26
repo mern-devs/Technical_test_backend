@@ -3,12 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
-  "engines": { "node": "12.16.3" },
   "scripts": {
-    "start": "node src/index.ts",
-    "build": "tsc src/db/mongoose.ts src/middlewares/logs.ts src/models/user.ts src/routers/users.ts src/transform/users.ts src/index.ts",
-    "postinstall": "npm run build",
-    "watch-ts": "tsc -w",
+    "start": "ts-node src/index.ts",
     "startNodeMon": "nodemon src/index.ts",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.ts",
     "local": "env-cmd -e local nodemon src/index.ts"
