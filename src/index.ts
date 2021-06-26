@@ -1,5 +1,5 @@
 const express = require('express')
-require('./db/mongoose')
+require('./db/mongoose.ts')
 const app = express()
 const {logError, logRequest} = require('./middlewares/logs')
 
