@@ -6,7 +6,6 @@ const User = require("../models/user");
 router.post("/users/login", async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
-      console.log(email, password)
       const user = await User.findByCredentials(email, password);
       const userObject = transformUser(user);
 
